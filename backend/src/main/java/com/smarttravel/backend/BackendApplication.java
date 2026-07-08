@@ -17,16 +17,31 @@ public class BackendApplication {
 
 	@Bean
 	public CommandLineRunner dataSeeder(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-		return args -> {
-			if (!userRepository.existsByEmail("admin@smarttravel.com")) {
-				User admin = new User();
-				admin.setName("Admin User");
-				admin.setEmail("admin@smarttravel.com");
-				admin.setPassword(passwordEncoder.encode("admin123"));
-				admin.setRole("ROLE_ADMIN");
-				userRepository.save(admin);
-			}
-		};
-	}
+    	return args -> {
 
+        	System.out.println("Seeder started...");
+
+        	if (!userRepository.existsByEmail("admin@smarttravel.com")) {
+
+        		User admin = new User();
+            	admin.setName("Admin User");
+            	admin.setEmail("admin@smarttravel.com");
+            	admin.setPassword(passwordEncoder.encode("admin123"));
+            	admin.setRole("ROLE_ADMIN");
+
+            	userRepository.save(admin);
+
+            	System.out.println("Admin inserted successfully!");
+
+            	System.out.println(userRepository.findAll());
+
+        	} else {
+
+            	System.out.println("Admin already exists.");
+
+            	System.out.println(userRepository.findAll());
+
+        	}
+    	};
+	}
 }
