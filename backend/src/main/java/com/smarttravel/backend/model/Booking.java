@@ -1,5 +1,6 @@
 package com.smarttravel.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -14,6 +15,7 @@ public class Booking {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "password", "bookings"})
     private User user;
 
     @Column(name = "user_id", insertable = false, updatable = false)
@@ -21,6 +23,7 @@ public class Booking {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accommodation_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "bookings"})
     private Accommodation accommodation;
 
     @Column(name = "accommodation_id", insertable = false, updatable = false)
@@ -48,91 +51,36 @@ public class Booking {
     public Booking() {
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public User getUser() {
-        return user;
-    }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public Accommodation getAccommodation() { return accommodation; }
+    public void setAccommodation(Accommodation accommodation) { this.accommodation = accommodation; }
 
-    public Long getUserId() {
-        return userId;
-    }
+    public Long getAccommodationId() { return accommodationId; }
+    public void setAccommodationId(Long accommodationId) { this.accommodationId = accommodationId; }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    public Timestamp getCheckIn() { return checkIn; }
+    public void setCheckIn(Timestamp checkIn) { this.checkIn = checkIn; }
 
-    public Accommodation getAccommodation() {
-        return accommodation;
-    }
+    public Timestamp getCheckOut() { return checkOut; }
+    public void setCheckOut(Timestamp checkOut) { this.checkOut = checkOut; }
 
-    public void setAccommodation(Accommodation accommodation) {
-        this.accommodation = accommodation;
-    }
+    public Integer getGuests() { return guests; }
+    public void setGuests(Integer guests) { this.guests = guests; }
 
-    public Long getAccommodationId() {
-        return accommodationId;
-    }
+    public BigDecimal getTotalPrice() { return totalPrice; }
+    public void setTotalPrice(BigDecimal totalPrice) { this.totalPrice = totalPrice; }
 
-    public void setAccommodationId(Long accommodationId) {
-        this.accommodationId = accommodationId;
-    }
+    public BookingStatus getStatus() { return status; }
+    public void setStatus(BookingStatus status) { this.status = status; }
 
-    public Timestamp getCheckIn() {
-        return checkIn;
-    }
-
-    public void setCheckIn(Timestamp checkIn) {
-        this.checkIn = checkIn;
-    }
-
-    public Timestamp getCheckOut() {
-        return checkOut;
-    }
-
-    public void setCheckOut(Timestamp checkOut) {
-        this.checkOut = checkOut;
-    }
-
-    public Integer getGuests() {
-        return guests;
-    }
-
-    public void setGuests(Integer guests) {
-        this.guests = guests;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public BookingStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(BookingStatus status) {
-        this.status = status;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 }

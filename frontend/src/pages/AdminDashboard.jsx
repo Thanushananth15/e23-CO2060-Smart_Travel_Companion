@@ -87,6 +87,7 @@ const AdminDashboard = () => {
       name: acc.name,
       price: acc.price,
       rating: acc.rating,
+      totalRooms: acc.totalRooms,
       imageUrl: acc.imageUrl,
       locationId: acc.locationId || acc.location?.id,
     });
@@ -103,6 +104,7 @@ const AdminDashboard = () => {
         name: editingAccommodation.name,
         price: editingAccommodation.price,
         rating: editingAccommodation.rating,
+        totalRooms: editingAccommodation.totalRooms,
         imageUrl: editingAccommodation.imageUrl,
       };
       if (editingAccommodation.locationId) {
@@ -331,6 +333,7 @@ const AdminDashboard = () => {
                   <input className="form-control" placeholder="Name" value={editingAccommodation.name} onChange={e => setEditingAccommodation({ ...editingAccommodation, name: e.target.value })} required />
                   <input className="form-control" type="number" placeholder="Price" value={editingAccommodation.price} onChange={e => setEditingAccommodation({ ...editingAccommodation, price: e.target.value })} required />
                   <input className="form-control" type="number" step="0.1" placeholder="Rating" value={editingAccommodation.rating} onChange={e => setEditingAccommodation({ ...editingAccommodation, rating: e.target.value })} required />
+                  <input className="form-control" type="number" min="0" placeholder="Available Rooms" value={editingAccommodation.totalRooms} onChange={e => setEditingAccommodation({ ...editingAccommodation,totalRooms: e.target.value === ""? "": Number(e.target.value)})}required/>
                   <input className="form-control" placeholder="Image URL" value={editingAccommodation.imageUrl} onChange={e => setEditingAccommodation({ ...editingAccommodation, imageUrl: e.target.value })} required />
                   <select className="form-control" value={editingAccommodation.locationId || ''} onChange={e => setEditingAccommodation({ ...editingAccommodation, locationId: Number(e.target.value) })} style={{ gridColumn: 'span 2' }}>
                     <option value="">Keep Current Location</option>

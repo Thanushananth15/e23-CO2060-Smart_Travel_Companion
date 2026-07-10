@@ -100,6 +100,11 @@ public class AdminController {
 
     @PutMapping("/accommodations/{id}")
     public ResponseEntity<Accommodation> updateAccommodation(@PathVariable Long id, @RequestBody Accommodation details) {
+        System.out.println("==================================");
+        System.out.println("Received name: " + details.getName());
+        System.out.println("Received totalRooms: " + details.getTotalRooms());
+        System.out.println("==================================");
+
         Accommodation acc = accommodationRepository.findById(id).orElse(null);
         if (acc == null) {
             return ResponseEntity.notFound().build();
@@ -107,6 +112,7 @@ public class AdminController {
         acc.setName(details.getName());
         acc.setPrice(details.getPrice());
         acc.setRating(details.getRating());
+        acc.setTotalRooms(details.getTotalRooms());
         acc.setImageUrl(details.getImageUrl());
         if (details.getLocation() != null && details.getLocation().getId() != null) {
             Location location = locationRepository.findById(details.getLocation().getId()).orElse(null);
